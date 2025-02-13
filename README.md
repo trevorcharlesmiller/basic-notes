@@ -1,16 +1,43 @@
-# basic_notes
+# Basic Notes
 
-A new Flutter project.
+Basic Notes is a very simple notes app written in Flutter.
+
+## Table of Contents
+- [Commons Configuration](#commons-configuration)
+    - [Table of Contents](#table-of-contents)
+    - [About The Project](#about-the-project)
+    - [Getting Started](#getting-started)
+    - [Usage](#usage)
+    - [Roadmap](#roadmap)
+    - [License](#license)
+    - [Limitation of Liability](#limitation-of-liability)
+
+## About The Project
+
+
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+todo
 
-A few resources to get you started if this is your first Flutter project:
+## Usage
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+See the [User Guide](doc/user-guide.md) for detailed information.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Roadmap
+
+See the [open issues](https://github.com/trevorcharlesmiller/basic-notes/issues) for a full list of proposed features (and known issues).
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## Limitation of Liability
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
