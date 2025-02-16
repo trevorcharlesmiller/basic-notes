@@ -10,33 +10,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import 'dart:convert';
-import 'dart:io';
-import 'package:basic_notes/model/note_list.dart';
-import 'package:injectable/injectable.dart';
 
-import '../injection.dart';
-import 'app_dir_repository.dart';
+import '../model/note_list.dart';
 
-const String fileName = 'note-list.json';
+abstract interface class NoteListRepository {
 
-@lazySingleton
-class NoteListRepository {
+  Future<void> save(NoteList noteList);
 
-  Future<void> save(NoteList noteList) async {
-    AppDirRepository appDirRepository = getIt<AppDirRepository>();
-    final Map<String, dynamic> noteListJson = noteList.toJson();
-    final String noteListJsonString = jsonEncode(noteListJson);
-    File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}$fileName');
-    await file.writeAsString(noteListJsonString);
-  }
-
-  Future<NoteList> load() async {
-    AppDirRepository appDirRepository = getIt<AppDirRepository>();
-    File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}$fileName');
-    final String noteListJsonString = await file.readAsString();
-    final Map<String, dynamic> noteListJson = jsonDecode(noteListJsonString);
-    return NoteList.fromJson(noteListJson);
-  }
+  Future<NoteList> load();
 
 }

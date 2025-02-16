@@ -10,44 +10,39 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import 'dart:io';
 
 import 'package:basic_notes/injection.dart';
 import 'package:basic_notes/model/note.dart';
 import 'package:basic_notes/model/note_list.dart';
-import 'package:basic_notes/repository/file/app_dir_repository.dart';
 import 'package:basic_notes/repository/file/file_note_list_repository.dart';
-import 'package:basic_notes/repository/note_list_repository.dart';
+import 'package:basic_notes/service/note_list_service.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 import 'package:mockito/annotations.dart';
 
-import 'note_repository_test.mocks.dart';
+import 'note_list_service_test.mocks.dart';
 
-@GenerateMocks([AppDirRepository])
+@GenerateMocks([FileNoteListRepository])
 void main() {
-  final appDirRepo = MockAppDirRepository();
+  FileNoteListRepository noteRepository = MockFileNoteListRepository();
+  final String id = 'note123';
+  final String contents = 'This is a test note';
+  final NoteList noteList = NoteList(notes: [Note(id: id, abstract: contents)]);
 
   setUpAll((){
-    when(appDirRepo.applicationDirectory()).thenReturn(File('test/fakey.txt').parent);
-    getIt.registerSingleton<AppDirRepository>(appDirRepo);
+    when(noteRepository.load()).thenAnswer((_)=>Future.value(noteList));
+    getIt.registerSingleton<FileNoteListRepository>(noteRepository);
   });
 
-  tearDownAll((){
-    File file = File('test/note-list.json');
-    file.deleteSync();
-  });
-
-  test('test note list repo', () async {
-    NoteListRepository repository = FileNoteListRepository();
-
-    NoteList list = NoteList(notes: []);
-    list.notes.add(Note(id: '123', abstract: 'This is a test note...'));
-
-    await repository.save(list);
-
-    NoteList loaded = await repository.load();
-    expect(loaded.notes, isNotEmpty);
-    expect(loaded.notes.length, equals(list.notes.length));
+  test('test note list service', () async {
+    NoteListService service = NoteListService();
+    await service.save(noteList);
+    verify(noteRepository.save(noteList));
+    NoteList actual = await service.load();
+    expect(actual, equals(noteList));
+    expect(actual.notes.length, equals(1));
+    expect(actual.notes[0].id, equals(id));
+    expect(actual.notes[0].abstract, equals(contents));
+    verify(noteRepository.load());
   });
 }

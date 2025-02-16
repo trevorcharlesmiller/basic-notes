@@ -13,8 +13,8 @@
 import 'dart:io';
 
 import 'package:basic_notes/injection.dart';
-import 'package:basic_notes/repository/app_dir_repository.dart';
-import 'package:basic_notes/repository/file_note_repository.dart';
+import 'package:basic_notes/repository/file/app_dir_repository.dart';
+import 'package:basic_notes/repository/file/file_note_repository.dart';
 import 'package:basic_notes/repository/note_repository.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
