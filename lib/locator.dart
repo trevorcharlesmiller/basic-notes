@@ -10,16 +10,15 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import 'package:get_it/get_it.dart';
-import 'package:injectable/injectable.dart';
 
-import 'injection.config.dart';
+import 'injection.dart';
+import 'repository/file_note_repository.dart';
+import 'repository/note_repository.dart';
 
-final getIt = GetIt.instance;
+class Locator {
 
-@InjectableInit(
-  initializerName: 'init', // default
-  preferRelativeImports: true, // default
-  asExtension: true, // default
-)
-void configureDependencies() => getIt.init();
+  static NoteRepository getNoteRepository() {
+    return getIt<FileNoteRepository>();
+  }
+
+}

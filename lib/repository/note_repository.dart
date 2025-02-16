@@ -10,29 +10,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import 'dart:io';
-import 'package:injectable/injectable.dart';
 
-import '../injection.dart';
-import 'app_dir_repository.dart';
+abstract interface class NoteRepository {
+  Future<String> loadNote(String id);
 
-@lazySingleton
-class NoteRepository {
-  Future<String> loadNote(String id) async {
-    AppDirRepository appDirRepository = getIt<AppDirRepository>();
-    File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}$id');
-    return await file.readAsString();
-  }
+  Future<void> saveNote(String id, String contents);
 
-  Future<void> saveNote(String id, String contents) async {
-    AppDirRepository appDirRepository = getIt<AppDirRepository>();
-    File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}$id');
-    await file.writeAsString(contents);
-  }
-
-  Future<void> deleteNote(String id) async {
-    AppDirRepository appDirRepository = getIt<AppDirRepository>();
-    File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}$id');
-    await file.delete();
-  }
+  Future<void> deleteNote(String id);
 }
