@@ -14,25 +14,28 @@ import 'dart:io';
 import 'package:basic_notes/repository/note_repository.dart';
 import 'package:injectable/injectable.dart';
 
-import '../injection.dart';
+import '../locator.dart';
 import 'app_dir_repository.dart';
 
 @lazySingleton
 class FileNoteRepository implements NoteRepository {
+  @override
   Future<String> loadNote(String id) async {
-    AppDirRepository appDirRepository = getIt<AppDirRepository>();
+    AppDirRepository appDirRepository = Locator.getAppDirRepository();
     File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}$id');
     return await file.readAsString();
   }
 
+  @override
   Future<void> saveNote(String id, String contents) async {
-    AppDirRepository appDirRepository = getIt<AppDirRepository>();
+    AppDirRepository appDirRepository = Locator.getAppDirRepository();
     File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}$id');
     await file.writeAsString(contents);
   }
 
+  @override
   Future<void> deleteNote(String id) async {
-    AppDirRepository appDirRepository = getIt<AppDirRepository>();
+    AppDirRepository appDirRepository = Locator.getAppDirRepository();
     File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}$id');
     await file.delete();
   }

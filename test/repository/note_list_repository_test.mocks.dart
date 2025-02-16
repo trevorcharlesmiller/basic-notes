@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:io' as _i2;
 
-import 'package:basic_notes/repository/app_dir_repository.dart' as _i3;
+import 'package:basic_notes/repository/file/app_dir_repository.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint

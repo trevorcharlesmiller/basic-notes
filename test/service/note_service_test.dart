@@ -12,7 +12,7 @@
 // limitations under the License.
 
 import 'package:basic_notes/injection.dart';
-import 'package:basic_notes/repository/file_note_repository.dart';
+import 'package:basic_notes/repository/file/file_note_repository.dart';
 import 'package:basic_notes/service/note_service.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';

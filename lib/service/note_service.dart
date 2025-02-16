@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 import 'package:injectable/injectable.dart';
-import '../locator.dart';
+import '../repository/locator.dart';
 import '../repository/note_repository.dart';
 
 @lazySingleton
