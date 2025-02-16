@@ -15,6 +15,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'repository/app_dir_repository.dart' as _i0;
 import 'repository/note_list_repository.dart' as _i461;
 import 'repository/note_repository.dart' as _i348;
+import 'service/note_service.dart' as _i634;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -31,6 +32,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i348.NoteRepository>(() => _i348.NoteRepository());
     gh.lazySingleton<_i461.NoteListRepository>(
         () => _i461.NoteListRepository());
+    gh.lazySingleton<_i634.NoteService>(() => _i634.NoteService());
     return this;
   }
 }
