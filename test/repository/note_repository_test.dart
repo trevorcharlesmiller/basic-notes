@@ -14,6 +14,7 @@ import 'dart:io';
 
 import 'package:basic_notes/injection.dart';
 import 'package:basic_notes/repository/app_dir_repository.dart';
+import 'package:basic_notes/repository/file_note_repository.dart';
 import 'package:basic_notes/repository/note_repository.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -32,7 +33,7 @@ void main() {
   });
 
   test('test note repo', () async {
-    NoteRepository repository = NoteRepository();
+    NoteRepository repository = FileNoteRepository();
     String contents = 'This is a test note';
     await repository.saveNote(id, contents);
     String result = await repository.loadNote(id);

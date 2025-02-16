@@ -10,24 +10,15 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import 'package:injectable/injectable.dart';
-import '../locator.dart';
-import '../repository/note_repository.dart';
 
-@lazySingleton
-class NoteService {
-  Future<String> loadNote(String id) async {
-    NoteRepository repository = Locator.getNoteRepository();
-    return await repository.loadNote(id);
+import 'injection.dart';
+import 'repository/file_note_repository.dart';
+import 'repository/note_repository.dart';
+
+class Locator {
+
+  static NoteRepository getNoteRepository() {
+    return getIt<FileNoteRepository>();
   }
 
-  Future<void> saveNote(String id, String contents) async {
-    NoteRepository repository = Locator.getNoteRepository();
-    return await repository.saveNote(id, contents);
-  }
-
-  Future<void> deleteNote(String id) async {
-    NoteRepository repository = Locator.getNoteRepository();
-    await repository.deleteNote(id);
-  }
 }

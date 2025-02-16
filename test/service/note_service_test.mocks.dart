@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:basic_notes/repository/note_repository.dart' as _i2;
+import 'package:basic_notes/repository/file_note_repository.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i4;
 
@@ -23,11 +23,12 @@ import 'package:mockito/src/dummies.dart' as _i4;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [NoteRepository].
+/// A class which mocks [FileNoteRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNoteRepository extends _i1.Mock implements _i2.NoteRepository {
-  MockNoteRepository() {
+class MockFileNoteRepository extends _i1.Mock
+    implements _i2.FileNoteRepository {
+  MockFileNoteRepository() {
     _i1.throwOnMissingStub(this);
   }
 

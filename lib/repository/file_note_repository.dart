@@ -10,24 +10,30 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+import 'dart:io';
+import 'package:basic_notes/repository/note_repository.dart';
 import 'package:injectable/injectable.dart';
-import '../locator.dart';
-import '../repository/note_repository.dart';
+
+import '../injection.dart';
+import 'app_dir_repository.dart';
 
 @lazySingleton
-class NoteService {
+class FileNoteRepository implements NoteRepository {
   Future<String> loadNote(String id) async {
-    NoteRepository repository = Locator.getNoteRepository();
-    return await repository.loadNote(id);
+    AppDirRepository appDirRepository = getIt<AppDirRepository>();
+    File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}$id');
+    return await file.readAsString();
   }
 
   Future<void> saveNote(String id, String contents) async {
-    NoteRepository repository = Locator.getNoteRepository();
-    return await repository.saveNote(id, contents);
+    AppDirRepository appDirRepository = getIt<AppDirRepository>();
+    File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}$id');
+    await file.writeAsString(contents);
   }
 
   Future<void> deleteNote(String id) async {
-    NoteRepository repository = Locator.getNoteRepository();
-    await repository.deleteNote(id);
+    AppDirRepository appDirRepository = getIt<AppDirRepository>();
+    File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}$id');
+    await file.delete();
   }
 }
