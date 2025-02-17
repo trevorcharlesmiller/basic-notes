@@ -10,26 +10,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'injection.dart';
-import 'notes_app.dart';
-
-void main() async {
-  configureDependencies();
-
-  runZonedGuarded(
-        () => runApp(
-      ProviderScope(
-        child: NotesApp(),
-      ),
-    ),
-        (error, stackTrace) {
-      print(error);
-      print(stackTrace);
-    },
-  );
+class Keys {
+  static final navKey = GlobalKey<NavigatorState>();
 }
