@@ -12,6 +12,7 @@
 // limitations under the License.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
+import 'package:uuid/uuid.dart';
 
 import '../injection.dart';
 import '../model/note.dart';
@@ -22,6 +23,13 @@ class NoteStateNotifier extends StateNotifier<NoteState> {
   NoteStateNotifier() : super(const NoteState());
 
   final log = Logger('NoteStateNotifier');
+  final uuid = Uuid();
+
+  Note createNote() {
+    Note note = Note(id: uuid.v4(), content: '');
+    state = state.copyWith(note: note);
+    return note;
+  }
 
   void deselectNote() {
     state = state.copyWith(note: null);
