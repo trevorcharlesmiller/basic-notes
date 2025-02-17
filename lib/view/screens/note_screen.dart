@@ -12,8 +12,12 @@
 // limitations under the License.
 
 import 'package:async/async.dart';
+import 'package:basic_notes/view/widgets/notes_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../model/note.dart';
+import '../../state/providers.dart';
 
 class NoteScreen extends ConsumerStatefulWidget {
   const NoteScreen({super.key});
@@ -54,6 +58,23 @@ class _NoteScreenState extends ConsumerState<NoteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    Note? note = ref.watch(noteStateProvider).note;
+    if (note != null) {
+      noteController.text = note.content ?? '';
+    }
+    return NotesScaffold(
+        body: note==null ? Container() : Padding(
+          padding: const EdgeInsets.all(10),
+          child: TextField(
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+            decoration:  const InputDecoration.collapsed(hintText: ''),
+            scrollPadding: const EdgeInsets.all(10.0),
+            autofocus: true,
+            controller: noteController,
+            onChanged: _onChanged,
+          ),
+        ),
+        includeButton: false);
   }
 }
