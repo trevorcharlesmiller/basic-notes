@@ -10,25 +10,20 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import 'package:injectable/injectable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../model/note.dart';
-import '../repository/locator.dart';
-import '../repository/note_repository.dart';
 
-@lazySingleton
-class NoteService {
-  Future<Note> loadNote(String id) async {
-    NoteRepository repository = Locator.getNoteRepository();
-    return await repository.loadNote(id);
-  }
+part 'note_state.freezed.dart';
 
-  Future<void> saveNote(Note note) async {
-    NoteRepository repository = Locator.getNoteRepository();
-    return await repository.saveNote(note);
-  }
+@Freezed()
+class NoteState with _$NoteState {
 
-  Future<void> deleteNote(String id) async {
-    NoteRepository repository = Locator.getNoteRepository();
-    await repository.deleteNote(id);
-  }
+  const factory NoteState({
+    @Default(null) Note? note,
+    @Default(false) bool isLoading,
+    @Default(false) bool isError,
+
+  }) = _NoteState;
+
 }

@@ -8,11 +8,11 @@ part of 'note.dart';
 
 _$NoteImpl _$$NoteImplFromJson(Map<String, dynamic> json) => _$NoteImpl(
       id: json['id'] as String,
-      abstract: json['abstract'] as String? ?? '',
+      content: json['content'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$NoteImplToJson(_$NoteImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'abstract': instance.abstract,
+      'content': instance.content,
     };

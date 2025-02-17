@@ -10,27 +10,33 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+import 'dart:convert';
 import 'dart:io';
 import 'package:basic_notes/repository/note_repository.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../model/note.dart';
 import '../locator.dart';
 import 'app_dir_repository.dart';
 
 @lazySingleton
 class FileNoteRepository implements NoteRepository {
   @override
-  Future<String> loadNote(String id) async {
+  Future<Note> loadNote(String id) async {
     AppDirRepository appDirRepository = Locator.getAppDirRepository();
     File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}$id');
-    return await file.readAsString();
+    final String noteJsonString = await file.readAsString();
+    final Map<String, dynamic> noteJson = jsonDecode(noteJsonString);
+    return Note.fromJson(noteJson);
   }
 
   @override
-  Future<void> saveNote(String id, String contents) async {
+  Future<void> saveNote(Note note) async {
     AppDirRepository appDirRepository = Locator.getAppDirRepository();
-    File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}$id');
-    await file.writeAsString(contents);
+    final Map<String, dynamic> noteJson = note.toJson();
+    final String noteJsonString = jsonEncode(noteJson);
+    File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}${note.id}');
+    await file.writeAsString(noteJsonString);
   }
 
   @override
