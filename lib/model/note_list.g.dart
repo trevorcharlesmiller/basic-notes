@@ -9,7 +9,7 @@ part of 'note_list.dart';
 _$NoteListImpl _$$NoteListImplFromJson(Map<String, dynamic> json) =>
     _$NoteListImpl(
       notes: (json['notes'] as List<dynamic>?)
-              ?.map((e) => Note.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => NoteListNote.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
     );

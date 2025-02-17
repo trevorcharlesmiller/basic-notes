@@ -13,8 +13,8 @@
 import 'dart:io';
 
 import 'package:basic_notes/injection.dart';
-import 'package:basic_notes/model/note.dart';
 import 'package:basic_notes/model/note_list.dart';
+import 'package:basic_notes/model/note_list_note.dart';
 import 'package:basic_notes/repository/file/app_dir_repository.dart';
 import 'package:basic_notes/repository/file/file_note_list_repository.dart';
 import 'package:basic_notes/repository/note_list_repository.dart';
@@ -42,7 +42,7 @@ void main() {
     NoteListRepository repository = FileNoteListRepository();
 
     NoteList list = NoteList(notes: []);
-    list.notes.add(Note(id: '123', abstract: 'This is a test note...'));
+    list.notes.add(NoteListNote(id: '123', abstract: 'This is a test note...'));
 
     await repository.save(list);
 

@@ -12,8 +12,8 @@
 // limitations under the License.
 
 import 'package:basic_notes/injection.dart';
-import 'package:basic_notes/model/note.dart';
 import 'package:basic_notes/model/note_list.dart';
+import 'package:basic_notes/model/note_list_note.dart';
 import 'package:basic_notes/repository/file/file_note_list_repository.dart';
 import 'package:basic_notes/service/note_list_service.dart';
 import 'package:mockito/mockito.dart';
@@ -27,7 +27,7 @@ void main() {
   FileNoteListRepository noteRepository = MockFileNoteListRepository();
   final String id = 'note123';
   final String contents = 'This is a test note';
-  final NoteList noteList = NoteList(notes: [Note(id: id, abstract: contents)]);
+  final NoteList noteList = NoteList(notes: [NoteListNote(id: id, abstract: contents)]);
 
   setUpAll((){
     when(noteRepository.load()).thenAnswer((_)=>Future.value(noteList));
