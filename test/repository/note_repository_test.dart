@@ -13,6 +13,7 @@
 import 'dart:io';
 
 import 'package:basic_notes/injection.dart';
+import 'package:basic_notes/model/note.dart';
 import 'package:basic_notes/repository/file/app_dir_repository.dart';
 import 'package:basic_notes/repository/file/file_note_repository.dart';
 import 'package:basic_notes/repository/note_repository.dart';
@@ -26,6 +27,8 @@ import 'note_repository_test.mocks.dart';
 void main() {
   final appDirRepo = MockAppDirRepository();
   final String id = 'test123.txt';
+  final String contents = 'This is a test note!';
+  Note note = Note(id: id, content: contents);
 
   setUpAll((){
     when(appDirRepo.applicationDirectory()).thenReturn(File('test/$id').parent);
@@ -34,14 +37,16 @@ void main() {
 
   test('test note repo', () async {
     NoteRepository repository = FileNoteRepository();
-    String contents = 'This is a test note';
-    await repository.saveNote(id, contents);
-    String result = await repository.loadNote(id);
-    expect(result, equals(contents));
+    String contents = 'This is a test note!';
+    await repository.saveNote(note);
+    Note result = await repository.loadNote(id);
+    expect(result.id, equals(id));
+    expect(result.content, equals(contents));
     contents = 'This is an updated note!';
-    await repository.saveNote(id, contents);
+    note = note.copyWith(content: contents);
+    await repository.saveNote(note);
     result = await repository.loadNote(id);
-    expect(result, equals(contents));
+    expect(result.content, equals(contents));
     await repository.deleteNote(id);
     File file = File('test/$id');
     expect(file.existsSync(), isFalse);

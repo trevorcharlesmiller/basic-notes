@@ -10,25 +10,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import 'package:injectable/injectable.dart';
-import '../model/note.dart';
-import '../repository/locator.dart';
-import '../repository/note_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 
-@lazySingleton
-class NoteService {
-  Future<Note> loadNote(String id) async {
-    NoteRepository repository = Locator.getNoteRepository();
-    return await repository.loadNote(id);
-  }
+import 'note_list_state.dart';
 
-  Future<void> saveNote(Note note) async {
-    NoteRepository repository = Locator.getNoteRepository();
-    return await repository.saveNote(note);
-  }
+class NoteListStateNotifier extends StateNotifier<NoteListState> {
+  NoteListStateNotifier() : super(const NoteListState());
 
-  Future<void> deleteNote(String id) async {
-    NoteRepository repository = Locator.getNoteRepository();
-    await repository.deleteNote(id);
-  }
+  final log = Logger('NoteListStateNotifier');
 }

@@ -3,11 +3,11 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
-import 'package:basic_notes/repository/file/file_note_repository.dart' as _i2;
+import 'package:basic_notes/model/note.dart' as _i2;
+import 'package:basic_notes/repository/file/file_note_repository.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -23,40 +23,45 @@ import 'package:mockito/src/dummies.dart' as _i4;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeNote_0 extends _i1.SmartFake implements _i2.Note {
+  _FakeNote_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [FileNoteRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFileNoteRepository extends _i1.Mock
-    implements _i2.FileNoteRepository {
+    implements _i3.FileNoteRepository {
   MockFileNoteRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Future<String> loadNote(String? id) =>
+  _i4.Future<_i2.Note> loadNote(String? id) =>
       (super.noSuchMethod(
             Invocation.method(#loadNote, [id]),
-            returnValue: _i3.Future<String>.value(
-              _i4.dummyValue<String>(this, Invocation.method(#loadNote, [id])),
+            returnValue: _i4.Future<_i2.Note>.value(
+              _FakeNote_0(this, Invocation.method(#loadNote, [id])),
             ),
           )
-          as _i3.Future<String>);
+          as _i4.Future<_i2.Note>);
 
   @override
-  _i3.Future<void> saveNote(String? id, String? contents) =>
+  _i4.Future<void> saveNote(_i2.Note? note) =>
       (super.noSuchMethod(
-            Invocation.method(#saveNote, [id, contents]),
-            returnValue: _i3.Future<void>.value(),
-            returnValueForMissingStub: _i3.Future<void>.value(),
+            Invocation.method(#saveNote, [note]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
           )
-          as _i3.Future<void>);
+          as _i4.Future<void>);
 
   @override
-  _i3.Future<void> deleteNote(String? id) =>
+  _i4.Future<void> deleteNote(String? id) =>
       (super.noSuchMethod(
             Invocation.method(#deleteNote, [id]),
-            returnValue: _i3.Future<void>.value(),
-            returnValueForMissingStub: _i3.Future<void>.value(),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
           )
-          as _i3.Future<void>);
+          as _i4.Future<void>);
 }

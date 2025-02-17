@@ -12,6 +12,7 @@
 // limitations under the License.
 
 import 'package:basic_notes/injection.dart';
+import 'package:basic_notes/model/note.dart';
 import 'package:basic_notes/repository/file/file_note_repository.dart';
 import 'package:basic_notes/service/note_service.dart';
 import 'package:mockito/mockito.dart';
@@ -25,18 +26,19 @@ void main() {
   FileNoteRepository noteRepository = MockFileNoteRepository();
   final String id = 'test123.txt';
   final String contents = 'This is a test note';
+  Note note = Note(id: id, content: contents);
 
   setUpAll((){
-    when(noteRepository.loadNote(id)).thenAnswer((_)=>Future.value(contents));
+    when(noteRepository.loadNote(id)).thenAnswer((_)=>Future.value(note));
     getIt.registerSingleton<FileNoteRepository>(noteRepository);
   });
 
   test('test note service', () async {
     NoteService service = NoteService();
-    await service.saveNote(id, contents);
-    verify(noteRepository.saveNote(id, contents));
-    String note = await service.loadNote(id);
-    expect(note, equals(contents));
+    await service.saveNote(note);
+    verify(noteRepository.saveNote(note));
+    Note result = await service.loadNote(id);
+    expect(result.content, equals(contents));
     verify(noteRepository.loadNote(id));
     await service.deleteNote(id);
     verify(noteRepository.deleteNote(id));

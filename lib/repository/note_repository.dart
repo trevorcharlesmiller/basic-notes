@@ -11,10 +11,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-abstract interface class NoteRepository {
-  Future<String> loadNote(String id);
+import '../model/note.dart';
 
-  Future<void> saveNote(String id, String contents);
+abstract interface class NoteRepository {
+  Future<Note> loadNote(String id);
+
+  Future<void> saveNote(Note note);
 
   Future<void> deleteNote(String id);
 }

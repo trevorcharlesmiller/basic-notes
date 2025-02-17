@@ -21,7 +21,7 @@ part 'note.g.dart';
 class Note with _$Note {
   const factory Note({
     required String id,
-  @Default('') String abstract,
+  @Default('') String content,
   }) = _Note;
 
   factory Note.fromJson(Map<String, Object?> json)
