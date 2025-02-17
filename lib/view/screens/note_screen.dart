@@ -19,6 +19,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../model/note.dart';
 import '../../state/providers.dart';
 
+
 class NoteScreen extends ConsumerStatefulWidget {
   const NoteScreen({super.key});
 
