@@ -1,4 +1,3 @@
-
 // This source code is copyright ot Trevor Miller.
 // Trevor Miller licenses this file to You under the MIT License (the
 // "License"); you may not use this file except in compliance with the License.
@@ -14,17 +13,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-import 'note_list_note.dart';
+part 'note_list_note.freezed.dart';
+part 'note_list_note.g.dart';
 
-part 'note_list.freezed.dart';
-part 'note_list.g.dart';
+@freezed
+class NoteListNote with _$NoteListNote {
+  const factory NoteListNote({
+    required String id,
+    @Default('') String abstract,
+  }) = _NoteListNote;
 
-@Freezed(makeCollectionsUnmodifiable: false)
-class NoteList with _$NoteList {
-  const factory NoteList({
-    @Default([]) List<NoteListNote> notes,
-  }) = _NoteList;
-
-  factory NoteList.fromJson(Map<String, Object?> json)
-  => _$NoteListFromJson(json);
+  factory NoteListNote.fromJson(Map<String, Object?> json)
+  => _$NoteListNoteFromJson(json);
 }

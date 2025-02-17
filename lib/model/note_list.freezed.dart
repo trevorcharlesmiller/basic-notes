@@ -20,7 +20,7 @@ NoteList _$NoteListFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$NoteList {
-  List<Note> get notes => throw _privateConstructorUsedError;
+  List<NoteListNote> get notes => throw _privateConstructorUsedError;
 
   /// Serializes this NoteList to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +37,7 @@ abstract class $NoteListCopyWith<$Res> {
   factory $NoteListCopyWith(NoteList value, $Res Function(NoteList) then) =
       _$NoteListCopyWithImpl<$Res, NoteList>;
   @useResult
-  $Res call({List<Note> notes});
+  $Res call({List<NoteListNote> notes});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$NoteListCopyWithImpl<$Res, $Val extends NoteList>
       notes: null == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
-              as List<Note>,
+              as List<NoteListNote>,
     ) as $Val);
   }
 }
@@ -74,7 +74,7 @@ abstract class _$$NoteListImplCopyWith<$Res>
       __$$NoteListImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Note> notes});
+  $Res call({List<NoteListNote> notes});
 }
 
 /// @nodoc
@@ -96,7 +96,7 @@ class __$$NoteListImplCopyWithImpl<$Res>
       notes: null == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
-              as List<Note>,
+              as List<NoteListNote>,
     ));
   }
 }
@@ -111,7 +111,7 @@ class _$NoteListImpl with DiagnosticableTreeMixin implements _NoteList {
 
   @override
   @JsonKey()
-  final List<Note> notes;
+  final List<NoteListNote> notes;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -156,13 +156,13 @@ class _$NoteListImpl with DiagnosticableTreeMixin implements _NoteList {
 }
 
 abstract class _NoteList implements NoteList {
-  const factory _NoteList({final List<Note> notes}) = _$NoteListImpl;
+  const factory _NoteList({final List<NoteListNote> notes}) = _$NoteListImpl;
 
   factory _NoteList.fromJson(Map<String, dynamic> json) =
       _$NoteListImpl.fromJson;
 
   @override
-  List<Note> get notes;
+  List<NoteListNote> get notes;
 
   /// Create a copy of NoteList
   /// with the given fields replaced by the non-null parameter values.
