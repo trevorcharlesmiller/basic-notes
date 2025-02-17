@@ -10,26 +10,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'injection.dart';
-import 'notes_app.dart';
+import '../widgets/notes_scaffold.dart';
 
-void main() async {
-  configureDependencies();
+class NoteListScreen extends StatelessWidget {
+  const NoteListScreen({super.key});
 
-  runZonedGuarded(
-        () => runApp(
-      ProviderScope(
-        child: NotesApp(),
-      ),
-    ),
-        (error, stackTrace) {
-      print(error);
-      print(stackTrace);
-    },
-  );
+  @override
+  Widget build(BuildContext context) {
+    return NotesScaffold(body: Container(), includeButton: true,);
+  }
 }
