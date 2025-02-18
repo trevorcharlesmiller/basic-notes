@@ -14,7 +14,9 @@ import 'package:basic_notes/model/note_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 
+import '../injection.dart';
 import '../model/note_list_note.dart';
+import '../service/note_list_service.dart';
 import 'note_list_state.dart';
 
 const maxAbstractLength = 30;
@@ -42,6 +44,15 @@ class NoteListStateNotifier extends StateNotifier<NoteListState> {
       notes = [...state.noteList!.notes, ];
       state = state.copyWith(noteList: state.noteList!.copyWith(notes: notes));
     }
+  }
 
+  Future<void> updateAbstract(String id, String content) async {
+    if(state.noteList != null) {
+      NoteListNote note = state.noteList!.notes.firstWhere((e) => e.id==id).copyWith(abstract: abstract(content));
+      state.noteList!.notes.removeWhere((e)=>e.id==id);
+      state.noteList!.notes.add(note);
+      NoteListService service = getIt<NoteListService>();
+      await service.save(state.noteList!);
+    }
   }
 }
