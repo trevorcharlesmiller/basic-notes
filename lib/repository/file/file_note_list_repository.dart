@@ -30,6 +30,7 @@ class FileNoteListRepository implements NoteListRepository {
     final Map<String, dynamic> noteListJson = noteList.toJson();
     final String noteListJsonString = jsonEncode(noteListJson);
     File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}$fileName');
+    await file.parent.create(recursive: true);
     await file.writeAsString(noteListJsonString);
   }
 

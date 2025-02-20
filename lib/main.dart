@@ -14,11 +14,17 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 
 import 'injection.dart';
 import 'notes_app.dart';
 
 void main() async {
+  Logger.root.level = Level.ALL; // defaults to Level.INFO
+  Logger.root.onRecord.listen((record) {
+    print('${record.level.name}: ${record.time}: ${record.message} ${record.error} ${record.stackTrace}');
+  });
+
   configureDependencies();
 
   runZonedGuarded(

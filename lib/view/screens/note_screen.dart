@@ -29,32 +29,35 @@ class NoteScreen extends ConsumerStatefulWidget {
 
 class _NoteScreenState extends ConsumerState<NoteScreen> {
   final TextEditingController noteController = TextEditingController();
-  late final RestartableTimer debounce;
-
-  @override
-  void initState() {
-    super.initState();
-    debounce = RestartableTimer(const Duration(milliseconds: 1000), () async {
-      //await ref.read(noteStateProvider.notifier).save(content);
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Updated note successfully.'),
-          ),
-        );
-      }
-    });
-  }
+  RestartableTimer? debounce = null;
 
   @override
   void dispose() {
-    debounce.cancel();
+    debounce?.cancel();
     noteController.dispose();
     super.dispose();
   }
 
   _onChanged(String content) {
-    if (debounce.isActive) debounce.reset();
+    if(debounce == null) {
+      debounce = RestartableTimer(const Duration(milliseconds: 2500), () async {
+        Note? note = ref.watch(noteStateProvider).note;
+        if(note != null) {
+          String text = noteController.text;
+          await ref.read(noteStateProvider.notifier).save(text);
+          await ref.read(noteListStateProvider.notifier).updateAbstract(note.id, text);
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Note saved.'),
+              ),
+            );
+          }
+        }
+      });
+    } else {
+      debounce!.reset();
+    }
   }
 
   @override

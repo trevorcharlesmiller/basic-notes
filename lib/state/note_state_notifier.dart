@@ -26,8 +26,11 @@ class NoteStateNotifier extends StateNotifier<NoteState> {
   final uuid = Uuid();
 
   Note createNote() {
+    log.fine('NoteStateNotifier#createNote() - START');
     Note note = Note(id: uuid.v4(), content: '');
     state = state.copyWith(note: note);
+    log.fine('NoteStateNotifier#createNote() - note=$note');
+    log.fine('NoteStateNotifier#createNote() - END');
     return note;
   }
 
@@ -50,7 +53,7 @@ class NoteStateNotifier extends StateNotifier<NoteState> {
   }
 
   Future<void> save(String content) async {
-    log.fine('NoteStateNotifier#save() - START');
+    log.fine('NoteStateNotifier#save($content) - START');
     try {
       NoteService noteService = getIt<NoteService>();
       Note note = state.note!.copyWith(content: content);
