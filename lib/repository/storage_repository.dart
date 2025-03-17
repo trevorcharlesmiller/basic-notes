@@ -11,12 +11,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import '../model/note.dart';
-
-abstract interface class NoteRepository {
-  Future<Note?> loadNote(String id);
-
-  Future<void> saveNote(Note note);
-
-  Future<void> deleteNote(String id);
+abstract interface class StorageRepository {
+  Future<String?> read(String key);
+  Future<void> write(String key, String? value);
+  Future<void> delete(String key);
 }

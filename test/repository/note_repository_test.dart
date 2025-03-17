@@ -39,14 +39,14 @@ void main() {
     NoteRepository repository = FileNoteRepository();
     String contents = 'This is a test note!';
     await repository.saveNote(note);
-    Note result = await repository.loadNote(id);
-    expect(result.id, equals(id));
-    expect(result.content, equals(contents));
+    Note? result = await repository.loadNote(id);
+    expect(result!.id, equals(id));
+    expect(result!.content, equals(contents));
     contents = 'This is an updated note!';
     note = note.copyWith(content: contents);
     await repository.saveNote(note);
     result = await repository.loadNote(id);
-    expect(result.content, equals(contents));
+    expect(result!.content, equals(contents));
     await repository.deleteNote(id);
     File file = File('test/$id');
     expect(file.existsSync(), isFalse);

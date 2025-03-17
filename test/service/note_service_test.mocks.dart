@@ -5,8 +5,11 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:basic_notes/model/note.dart' as _i2;
+import 'package:basic_notes/model/note.dart' as _i5;
 import 'package:basic_notes/repository/file/file_note_repository.dart' as _i3;
+import 'package:basic_notes/repository/secure/secure_storage_repository.dart'
+    as _i6;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -23,8 +26,9 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeNote_0 extends _i1.SmartFake implements _i2.Note {
-  _FakeNote_0(Object parent, Invocation parentInvocation)
+class _FakeFlutterSecureStorage_0 extends _i1.SmartFake
+    implements _i2.FlutterSecureStorage {
+  _FakeFlutterSecureStorage_0(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -38,17 +42,15 @@ class MockFileNoteRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Note> loadNote(String? id) =>
+  _i4.Future<_i5.Note?> loadNote(String? id) =>
       (super.noSuchMethod(
             Invocation.method(#loadNote, [id]),
-            returnValue: _i4.Future<_i2.Note>.value(
-              _FakeNote_0(this, Invocation.method(#loadNote, [id])),
-            ),
+            returnValue: _i4.Future<_i5.Note?>.value(),
           )
-          as _i4.Future<_i2.Note>);
+          as _i4.Future<_i5.Note?>);
 
   @override
-  _i4.Future<void> saveNote(_i2.Note? note) =>
+  _i4.Future<void> saveNote(_i5.Note? note) =>
       (super.noSuchMethod(
             Invocation.method(#saveNote, [note]),
             returnValue: _i4.Future<void>.value(),
@@ -60,6 +62,53 @@ class MockFileNoteRepository extends _i1.Mock
   _i4.Future<void> deleteNote(String? id) =>
       (super.noSuchMethod(
             Invocation.method(#deleteNote, [id]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+}
+
+/// A class which mocks [SecureStorageRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSecureStorageRepository extends _i1.Mock
+    implements _i6.SecureStorageRepository {
+  MockSecureStorageRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.FlutterSecureStorage get storage =>
+      (super.noSuchMethod(
+            Invocation.getter(#storage),
+            returnValue: _FakeFlutterSecureStorage_0(
+              this,
+              Invocation.getter(#storage),
+            ),
+          )
+          as _i2.FlutterSecureStorage);
+
+  @override
+  _i4.Future<void> delete(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#delete, [key]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  _i4.Future<String?> read(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#read, [key]),
+            returnValue: _i4.Future<String?>.value(),
+          )
+          as _i4.Future<String?>);
+
+  @override
+  _i4.Future<void> write(String? key, String? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#write, [key, value]),
             returnValue: _i4.Future<void>.value(),
             returnValueForMissingStub: _i4.Future<void>.value(),
           )

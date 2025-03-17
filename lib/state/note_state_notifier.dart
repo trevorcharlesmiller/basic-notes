@@ -12,7 +12,6 @@
 // limitations under the License.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
-import 'package:uuid/uuid.dart';
 
 import '../injection.dart';
 import '../model/note.dart';
@@ -23,26 +22,12 @@ class NoteStateNotifier extends StateNotifier<NoteState> {
   NoteStateNotifier() : super(const NoteState());
 
   final log = Logger('NoteStateNotifier');
-  final uuid = Uuid();
 
-  Note createNote() {
-    log.fine('NoteStateNotifier#createNote() - START');
-    Note note = Note(id: uuid.v4(), content: '');
-    state = state.copyWith(note: note);
-    log.fine('NoteStateNotifier#createNote() - note=$note');
-    log.fine('NoteStateNotifier#createNote() - END');
-    return note;
-  }
-
-  void deselectNote() {
-    state = state.copyWith(note: null);
-  }
-
-  Future<void> load(String id) async {
+  Future<void> load() async {
     log.fine('NoteStateNotifier#load() - START');
     try {
       NoteService noteService = getIt<NoteService>();
-      Note note = await noteService.loadNote(id);
+      Note note = await noteService.loadNote();
       state = state.copyWith(note: note);
     } catch (error, trace) {
       log.severe('Failed to load note', error, trace);
@@ -67,11 +52,11 @@ class NoteStateNotifier extends StateNotifier<NoteState> {
     log.fine('NoteStateNotifier#save() - END');
   }
 
-  Future<void> delete(String id) async {
+  Future<void> delete() async {
     log.fine('NoteStateNotifier#delete() - START');
     try {
       NoteService noteService = getIt<NoteService>();
-      await noteService.deleteNote(id);
+      await noteService.deleteNote();
     } catch (error, trace) {
       log.severe('Failed to delete note', error, trace);
       state = state.copyWith(isError: true);

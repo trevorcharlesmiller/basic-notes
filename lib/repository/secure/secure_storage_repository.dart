@@ -11,12 +11,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import '../model/note.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:injectable/injectable.dart';
 
-abstract interface class NoteRepository {
-  Future<Note?> loadNote(String id);
+import '../storage_repository.dart';
 
-  Future<void> saveNote(Note note);
+@lazySingleton
+class SecureStorageRepository implements StorageRepository {
+  final storage = FlutterSecureStorage();
 
-  Future<void> deleteNote(String id);
+  @override
+  Future<void> delete(String key) async {
+    await storage.delete(key: key);
+  }
+
+  @override
+  Future<String?> read(String key) async {
+    return await storage.read(key: key);
+  }
+
+  @override
+  Future<void> write(String key, String? value) async {
+    await storage.write(key: key, value: value);
+  }
+
 }
