@@ -12,13 +12,12 @@
 // limitations under the License.
 
 import 'package:async/async.dart';
-import 'package:basic_notes/view/widgets/notes_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../model/note.dart';
 import '../../state/providers.dart';
-
+import '../widgets/notes_scaffold.dart';
 
 class NoteScreen extends ConsumerStatefulWidget {
   const NoteScreen({super.key});
@@ -45,7 +44,6 @@ class _NoteScreenState extends ConsumerState<NoteScreen> {
         if(note != null) {
           String text = noteController.text;
           await ref.read(noteStateProvider.notifier).save(text);
-          await ref.read(noteListStateProvider.notifier).updateAbstract(note.id, text);
           if (context.mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -79,6 +77,6 @@ class _NoteScreenState extends ConsumerState<NoteScreen> {
             onChanged: _onChanged,
           ),
         ),
-        includeButton: false);
+    );
   }
 }

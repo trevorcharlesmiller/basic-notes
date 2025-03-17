@@ -15,7 +15,6 @@ import 'package:flutter/material.dart';
 
 import 'constants/keys.dart';
 import 'routes.dart';
-import 'view/screens/note_list_screen.dart';
 import 'view/screens/note_screen.dart';
 
 class NotesApp extends StatelessWidget {
@@ -31,10 +30,10 @@ class NotesApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Poppins',
       ),
-      initialRoute: Routes.homeScreen,
+      initialRoute: Routes.noteScreen,
       navigatorKey: Keys.navKey,
       routes: {
-        Routes.homeScreen: (context) => const NoteListScreen(),
+        // Routes.homeScreen: (context) => const NoteListScreen(),
         Routes.noteScreen: (context) => const NoteScreen(),
       },
     );

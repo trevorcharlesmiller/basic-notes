@@ -13,15 +13,9 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'note_list_state.dart';
-import 'note_list_state_notifier.dart';
 import 'note_state.dart';
 import 'note_state_notifier.dart';
 
 final noteStateProvider = StateNotifierProvider<NoteStateNotifier, NoteState>((ref) {
   return NoteStateNotifier();
-});
-
-final noteListStateProvider = StateNotifierProvider<NoteListStateNotifier, NoteListState>((ref) {
-  return NoteListStateNotifier();
 });

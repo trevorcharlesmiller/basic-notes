@@ -14,9 +14,7 @@
 
 import '../injection.dart';
 import 'file/app_dir_repository.dart';
-import 'file/file_note_list_repository.dart';
 import 'file/file_note_repository.dart';
-import 'note_list_repository.dart';
 import 'note_repository.dart';
 
 /// This class acts as a mapper between repository interfaces and the actual
@@ -32,10 +30,6 @@ class Locator {
 
   static NoteRepository getNoteRepository() {
     return getIt<FileNoteRepository>();
-  }
-
-  static NoteListRepository getNoteListRepository() {
-    return getIt<FileNoteListRepository>();
   }
 
 }

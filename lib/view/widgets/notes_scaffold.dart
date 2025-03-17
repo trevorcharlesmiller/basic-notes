@@ -10,36 +10,20 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../model/note.dart';
-import '../../routes.dart';
-import '../../state/providers.dart';
-
-class NotesScaffold extends ConsumerWidget {
+class NotesScaffold extends StatelessWidget {
   final Widget body;
-  final bool includeButton;
-  const NotesScaffold({super.key, required this.body, required this.includeButton});
+  const NotesScaffold({super.key, required this.body});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Notes'),
       ),
       body: SafeArea(child: body),
-      floatingActionButton: includeButton
-          ? FloatingActionButton(
-              onPressed: () {
-                Note note = ref.read(noteStateProvider.notifier).createNote();
-                ref.read(noteListStateProvider.notifier).addNote(note.id, note.content);
-                Navigator.pushNamed(context, Routes.noteScreen);
-              },
-              tooltip: 'Add new note',
-              child: const Icon(Icons.add),
-            )
-          : null,
     );
   }
 }
