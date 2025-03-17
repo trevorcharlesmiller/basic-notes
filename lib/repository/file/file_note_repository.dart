@@ -22,12 +22,17 @@ import 'app_dir_repository.dart';
 @lazySingleton
 class FileNoteRepository implements NoteRepository {
   @override
-  Future<Note> loadNote(String id) async {
+  Future<Note?> loadNote(String id) async {
     AppDirRepository appDirRepository = Locator.getAppDirRepository();
     File file = File('${appDirRepository.applicationDirectory().path}${Platform.pathSeparator}$id');
-    final String noteJsonString = await file.readAsString();
-    final Map<String, dynamic> noteJson = jsonDecode(noteJsonString);
-    return Note.fromJson(noteJson);
+    bool fileExists = await file.exists();
+    if(fileExists) {
+      final String noteJsonString = await file.readAsString();
+      final Map<String, dynamic> noteJson = jsonDecode(noteJsonString);
+      return Note.fromJson(noteJson);
+    } else {
+      return null;
+    }
   }
 
   @override

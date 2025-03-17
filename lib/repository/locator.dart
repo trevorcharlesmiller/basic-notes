@@ -12,10 +12,13 @@
 // limitations under the License.
 
 
+import 'package:basic_notes/repository/storage_repository.dart';
+
 import '../injection.dart';
 import 'file/app_dir_repository.dart';
 import 'file/file_note_repository.dart';
 import 'note_repository.dart';
+import 'secure/secure_storage_repository.dart';
 
 /// This class acts as a mapper between repository interfaces and the actual
 /// concrete implementation allowing us to switch out implementations easily.
@@ -30,6 +33,10 @@ class Locator {
 
   static NoteRepository getNoteRepository() {
     return getIt<FileNoteRepository>();
+  }
+
+  static StorageRepository getStorageRepository() {
+    return getIt<SecureStorageRepository>();
   }
 
 }
