@@ -63,6 +63,8 @@ class _NoteScreenState extends ConsumerState<NoteScreen> {
     Note? note = ref.watch(noteStateProvider).note;
     if (note != null) {
       noteController.text = note.content ?? '';
+    } else {
+      ref.read(noteStateProvider.notifier).load();
     }
     return NotesScaffold(
         body: note==null ? Container() : Padding(

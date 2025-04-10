@@ -18,25 +18,13 @@ import '../repository/locator.dart';
 import '../repository/note_repository.dart';
 
 const String noteIdKey = 'NOTE_ID';
+const String noteId = 'f1924716-a62b-474e-9afe-d5098f129cd0';
 
 @lazySingleton
 class NoteService {
 
-  final uuid = Uuid();
-
-  Future<String> getNoteId() async {
-    StorageRepository storageRepository = Locator.getStorageRepository();
-    String? noteId = await storageRepository.read(noteIdKey);
-    if(noteId == null) {
-      noteId = uuid.v4();
-      await storageRepository.write(noteIdKey, noteId);
-    }
-    return noteId;
-  }
-
   Future<Note> loadNote() async {
     NoteRepository repository = Locator.getNoteRepository();
-    String noteId = await getNoteId();
     Note? note = await repository.loadNote(noteId);
     if(note == null) {
       note = Note(id: noteId, content: '');
@@ -52,7 +40,6 @@ class NoteService {
 
   Future<void> deleteNote() async {
     NoteRepository repository = Locator.getNoteRepository();
-    String noteId = await getNoteId();
     await repository.deleteNote(noteId);
   }
 }
